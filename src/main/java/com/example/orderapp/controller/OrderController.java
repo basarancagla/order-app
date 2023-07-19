@@ -1,10 +1,9 @@
 package com.example.orderapp.controller;
 
-import com.example.orderapp.entity.OrderEntity;
+import com.example.orderapp.models.OrdersResponseBody;
 import com.example.orderapp.models.CreateOrderResponseBody;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +27,7 @@ public class OrderController  {
     }
 
     @RequestMapping(value = "/orders", method = RequestMethod.GET)
-    public ResponseEntity<List<OrderEntity>> findOrders() {
+    public ResponseEntity<List<OrdersResponseBody>> findOrders() {
         return ResponseEntity.ok(orderService.findOrders());
     }
 }

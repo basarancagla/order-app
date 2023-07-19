@@ -18,7 +18,7 @@ public class UserService {
 
     private final UsersGateway usersGateway;
 
-    static Integer getTotalPages(final UserInfoResponse response) {
+    public static Integer getTotalPages(final UserInfoResponse response) {
         return Optional.ofNullable(response)
                 .map(UserInfoResponse::getTotal_pages)
                 .orElse(0);

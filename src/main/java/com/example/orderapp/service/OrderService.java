@@ -1,5 +1,6 @@
 package com.example.orderapp.service;
 
+import com.example.orderapp.models.OrdersResponseBody;
 import com.example.orderapp.exception.ApiRequestException;
 import com.example.orderapp.models.CreateOrderRequestBody;
 import com.example.orderapp.entity.OrderEntity;
@@ -8,7 +9,7 @@ import com.example.orderapp.models.User;
 import com.example.orderapp.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -47,7 +48,12 @@ public class OrderService {
                 });
     }
 
-    public List<OrderEntity> findOrders() {
-        return orderRepository.findAll().stream().collect(Collectors.toList());
+    public List<OrdersResponseBody> findOrders() {
+        return orderRepository.findAll()
+                .stream()
+                .map(customer->
+                        new ModelMapper().map(customer, OrdersResponseBody.class))
+                .collect(Collectors.toList());
+
     }
 }
